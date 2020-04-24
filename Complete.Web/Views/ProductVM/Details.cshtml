@@ -1,0 +1,64 @@
+﻿@model Complete.Domain.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descriptions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descriptions)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier.SupplierName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.SupplierName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantities.FirstOrDefault().Quantity1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantities.FirstOrDefault().Quantity1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantities.FirstOrDefault().Rate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantities.FirstOrDefault().Rate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

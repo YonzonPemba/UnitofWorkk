@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Complete.Domain.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descriptions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Supplier.SupplierName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantities.FirstOrDefault().Quantity1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantities.FirstOrDefault().Rate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ProductName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Descriptions)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Supplier.SupplierName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Quantities.FirstOrDefault().Quantity1)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Quantities.FirstOrDefault().Rate)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+    </td>
+</tr>
+}
+
+</table>

@@ -1,0 +1,500 @@
+﻿@model IEnumerable<Complete.Web.ViewModel.BillingProductVM> 
+<div>
+    <div id="MainDiv" class="col-md-8">
+        <div>
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <tr>
+                        <td>
+                            <input type="hidden" name="ProductId" id="ProductId" readonly />
+                            <strong>Item</strong><br />
+                            <input type="text" name="ProductName" id="ProductName" readonly class="form-control input-sm" />
+                        </td>
+
+                        <td>
+                            <strong>Rate</strong><br />
+                            <input type="text" name="Rate" id="getRate" readonly class="form-control input-sm " />
+                        </td>
+                        <td>
+                            <strong>Qty</strong><br />
+                            <input type="text" tabindex="1" name="Quantity" id="getQty" class="form-control input-sm NumbersOnly" />
+                        </td>
+                        <td>
+                            <strong>Discount</strong><br />
+                            <input type="text" id="Discount" name="Discount" class="form-control input-sm" />
+                        </td>
+                        <td>
+                            <br />
+                            <input type="button" tabindex="2" value="Add to list" id="btnAdd" style="float:right; margin-right:10px" class="btn btn-primary btn-sm" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        @*<div class="container-fluid" style="margin:20px 0px;">
+            <div class="row">
+                <div class="col-md-10">
+                    <select id="select1" class="change" name="productname" style="width:30%">
+                        <option value="" selected disabled hidden></option>
+                    </select>
+
+                    <select id="select2" class="change" name="category" style="width:30%">
+                        <option value="" selected disabled hidden></option>
+                    </select>
+
+                    <select id="select3" class="change" name="supplier" style="width:30%">
+                        <option value="" selected disabled hidden></option>
+                    </select>
+                </div>
+            </div>
+        </div>*@
+
+
+
+
+        <div>
+            <div class="col-md-12">
+                <table class="table table-striped table-hover" id="maintable">
+                    <thead>
+                        <tr style="background-color:#3d566e; color:#ecf0f1">
+                            <th>
+                                ProductName
+                            </th>
+                            <th>
+                                Descriptions
+                            </th>
+                            <th>
+                                Category
+                            </th>
+                            <th>
+                                Supplier
+                            </th>
+                            <th>
+                                Qty
+                            </th>
+                            <th>
+                                Rate
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="@item.ProductId">
+                                <td class="ProductName">@item.ProductName</td>
+                                <td class="Descriptions">@item.Descriptions</td>
+                                <td class="SupplierName">@item.SupplierName</td>
+                                <td class="CategoryName">@item.CategoryName</td>
+                                <td class="Quantity">@item.Quantity</td>
+                                <td class="Rate">@item.Rate</td>
+                                <td class="Action"><button class="Add">Add</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @*  </div>*@
+
+
+    </div>
+
+    <div class="col-sm-4 ">
+        <div class="box box-danger box-body" style="height:450px">
+            <div>
+                <div class="col-md-12">
+                    <div>
+                        <div class="col-md-12" style="">
+                            <h4 style=" align-content:center">&nbsp;<span class="glyphicon glyphicon-list"></span> &nbsp; &nbsp; Sales Items</h4>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-12" style="height:250px; ">
+                            <table class="table table-condensed table-striped" id="tblAppendHere">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Qty</th>
+                                        <th>Rate</th>
+                                        <th>Discount</th>
+                                        <th>Amt</th>
+                                        <th><span class="glyphicon glyphicon-trash"></span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr />
+                    <div>
+                        <div class="col-md-6"> <h3 class="pull-right">Total :</h3> </div>
+                        <div class="col-md-6"> <input type="hidden" class="setTotal" style="width:90px; border:hidden;" readonly /> <h3><span class="setTotalText pull-right"></span></h3></div>
+                    </div>
+
+                    <div class="footer" id="btnModalTrigger">
+                        <div class="col-md-12">
+                            <button data-toggle="modal" id="btnSave" class="btn-block" data-target="#myModal" style="background-color:#16a085; cursor:pointer">
+                                <h4 style="color:#ffffff; text-align:center;"> SAVE &nbsp;<span class="glyphicon glyphicon-forward"></span> &nbsp; &nbsp; </h4>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <!-- Modal -->
+            <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#c0392b; color:white;">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Check out</h4>
+                        </div>
+                        <div class="modal-body" style="margin:auto">
+
+                            <table class="table table-striped">
+                                <tr>
+                                    <td>CustomerName</td>
+                                    <td><input type="text" name="customername" id="customername" class="form-control setTotal" style=" border:hidden" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td><input type="text" name="address" id="address" class="form-control setTotal" style=" border:hidden" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Contact</td>
+                                    <td><input type="text" name="contact" id="contact" class="form-control setTotal" style=" border:hidden" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td><input type="text" name="total" class="form-control setTotal" style=" border:hidden" readonly /></td>
+                                </tr>
+                                <tr>
+                                    <td>Discount amt</td>
+                                    <td><input type="text" name="discount" class="form-control " id="discountAmount" readonly /></td>
+                                </tr>
+                                <tr>
+                                    <td>Total Payable</td>
+                                    <td><input type="text" name="grandtotal" class="form-control " id="grandTotal" readonly /></td>
+                                </tr>
+                            </table>
+
+
+
+                        </div>
+
+                        <div class="modal-footer" style="padding:3px;background-color:#16a085; cursor:pointer" id="btnCheckOut">
+
+                            <h4 style="color:#ffffff; text-align:center"> Done &nbsp;<span class="glyphicon glyphicon-check glyphicon-align-right"></span> &nbsp; &nbsp; </h4>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+<script>
+     @*var pnames = JSON.parse('@Html.Raw(ViewBag.products)');
+    var categories = JSON.parse('@Html.Raw(ViewBag.categories)');
+    var suppliers = JSON.parse('@Html.Raw(ViewBag.suppliers)');*@
+
+
+
+    //    $('#select1').select2({
+    //        data: pnames,
+    //        placeholder: "Select Product"
+    //    });
+
+    //    $('#select2').select2({
+    //        data: categories,
+    //        placeholder: "Select Category"
+    //    });
+
+    //    $('#select3').select2({
+    //        data: suppliers,
+    //        placeholder: "Select Supplier"
+    //    });
+
+
+
+    //$('body').on('change', '.change', function () {
+    //    var selectedProduct = $("#select1 option:selected").html();
+    //    var selectedCategory = $("#select2 option:selected").html();
+    //    var selectedSupplier = $("#select3 option:selected").html();
+    //    var results = Search(selectedProduct, selectedCategory, selectedSupplier);
+
+    //    var row;
+
+    //    $.each(results, function (key, el) {
+    //        row += '<tr id="' + el.ProductId + '">' +
+    //            '<td  class="ProductName">' + el.ProductName + '</td>' +
+    //            '<td  class="Descriptions">' + el.Descriptions + '</td>' +
+    //            '<td  class="SupplierName">' + el.SupplierId + '</td>' +
+    //            '<td  class="CategoryName">' + el.CategoryId + '</td>' +
+    //            '<td  class="Quantity">' + el.Quantity + '</td>' +
+    //            '<td  class="Rate">' + el.Rate + '</td>' +
+    //            '<td  class="Action">' + '<button class="Add">Add</button>' + '</td></tr>';
+    //    })
+    //    $("#maintable tbody").html('');
+    //    $("#maintable tbody").html(row);
+    //})
+
+
+
+    var quantity;
+    var rate;
+    $('body').on('click', '.Add', function () {
+        var productId = $(this).closest('tr').attr('id');
+        var productName = $(this).closest('tr').find('td.ProductName').html();
+        rate = $(this).closest('tr').find('td.Rate').html();
+        quantity = $(this).closest('tr').find('td.Quantity').html();
+
+
+        $("input[name=ProductId]").val(productId);
+        $("input[name=ProductName]").val(productName);
+        $("input[name=Rate]").val(rate);
+    })
+
+
+    var quantityElement = $("input[name=Quantity]");
+    var previousQuantity;
+    $('body').on('focus', 'input[name=Quantity]', function () {
+        var quant = $(this).val();
+        previousQuantity = quant;
+    });
+
+    $('body').on('blur', 'input[name=Quantity]', function () {
+        var quant = $(this).val();
+        if (isNaN(quant) == true || quant == '') {
+            quantityElement.val(previousQuantity);
+            alert("Quantity must be in numeric value");
+            return false;
+        }
+        if (Number(quant) > quantity) {
+            alert("quantity cant be greater than stock");
+            quantityElement.val(quantity);
+        }
+
+    });
+
+    var discountElement = $("input[name=Discount]");
+    $('body').on('blur', 'input[name=Discount]', function () {
+        var discount = $(this).val();
+        if (isNaN(discount) == true || discount == '') {
+            discountElement.val('');
+            alert("Discount must be in numeric value");
+            return false;
+        }
+        if (Number(discount) > rate) {
+            alert("Discount cant be greater than rate");
+            discountElement.val('');
+        }
+
+    });
+
+    order = new Array();
+    $('body').on('click', '#btnAdd', function () {
+        if (Validation()) {
+            var productId = $("input[name=ProductId]").val();
+            var quantity = $("input[name=Quantity]").val();
+            var discount = $("input[name=Discount]").val() > 0 ? $("input[name=Discount]").val() : 0;
+            var rate = $("input[name=Rate]").val();
+            var productName = $("input[name=ProductName]").val();
+
+            //var product = datas.filter(function (el) {
+            //   return el.ProductId == productId;
+            //})
+            var neworder = {
+                ProductId: productId,
+                Quantity: quantity,
+                Rate: rate,
+                Discount: discount
+            };
+            var present = isPresent(order, neworder);
+            if (!present) {
+                var amount = (quantity * (rate - discount));
+                var row = '<tr id="' + neworder.ProductId + '"><td>' + productName + '</td><td>' + quantity + '</td><td>' + rate + '</td><td>' + discount + '</td><td>' + amount + '</td><td><button class="delete">Delete</td></tr>';
+                order.push(neworder);
+                $("#tblAppendHere tbody").append(row);
+                //$("#orderList").append('<li id="' + neworder.ProductId + '">' + neworder.Quantity + neworder.Discount + productName + neworder.Rate + "<button class='delete'>Delete</button>" + '</li>');
+
+            }
+            else {
+                alert("already added to list");
+            }
+            $("input[name=ProductId]").val('');
+            $("input[name=ProductName]").val('');
+            $("input[name=Quantity]").val('');
+            $("input[name=Discount]").val('');
+            $("input[name=Rate]").val('');
+            $("input[name=ProductName]").val('');
+            var sum = order.reduce(function (sum, i) {
+                return sum + (i.Quantity * (i.Rate - i.Discount));
+            }, 0);
+            console.log(sum);
+            $(".setTotalText").text(sum);
+        }
+
+    })
+
+    $('body').on('click', '.delete', function () {
+        var id = $(this).closest('tr').attr('id');
+        order = order.filter(function (el) {
+            return el.ProductId !== id;
+        })
+        $(this).closest('tr').remove();
+        var sum = order.reduce(function (sum, i) {
+            return sum + (i.Quantity * (i.Rate - i.Discount));
+        }, 0);
+        $(".setTotalText").text(sum);
+    })
+
+
+    $('body').on('click', '#btnSave', function () {
+        var grandtotal = order.reduce(function (sum, i) {
+            return sum + (i.Quantity * (i.Rate - i.Discount));
+        }, 0);
+        var total = order.reduce(function (sum, i) {
+            return sum + (i.Quantity * i.Rate);
+        }, 0);
+        var discount = order.reduce(function (sum, i) {
+            return sum + (i.Quantity * i.Discount);
+        }, 0);
+        $("input[name=total]").val(total);
+        $("input[name=discount]").val(discount);
+        $("input[name=grandtotal]").val(grandtotal);
+    })
+
+    $('body').on('click', '#btnCheckOut', function () {
+        if (($('input[name=grandtotal]').val() == "" || $('input[name=grandtotal]').val() == NaN || $('input[name=grandtotal]').val() == 0)) {
+            alert("No data");
+            $('#myModal').modal('hide');
+        }
+        else {
+            if (    $('input[name=customername]').val() == '' || $('input[name=address]').val() == '' || $('input[name=contact]').val() == ''){
+                alert("Please Insert Customer Details");
+            }
+            else {
+                var customername = $('input[name=customername]').val();
+                var address = $('input[name=address]').val();
+                var contact = $('input[name=contact]').val();
+                var grandtotal = $('input[name=grandtotal]').val();
+                var total = $('input[name=total]').val();
+                var discount = $('input[name=discount]').val();
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: '@Url.Action("Create","Billings")',
+                    data: JSON.stringify({
+                        billingProductViewModel: order, customername: customername, address: address, contact: contact, gt: grandtotal, total: total, discount
+                    })
+                }).done(function (response) {
+                    location.reload(true);
+                    console.log(response);
+            })
+            .fail(function (XMLHttpReques, textStatus, errorThrown) {
+                alert("error happened in ajax request");
+            });
+                order = [];
+                //$("#tblAppendHere tbody").html('');
+                $(".setTotalText").text('');
+                $('input[name=customername]').val('');
+                $('input[name=address]').val('');
+                $('input[name=contact]').val('');
+                $('#myModal').modal('hide');
+            }
+            //openModal();
+        }
+
+    })
+
+
+
+
+    function Validation() {
+        var quantity = $("input[name=Quantity]").val();
+        var discount = $("input[name=Discount]").val();
+        if (quantity == '') {
+            toastr.warning('Quantity cannot be null', 'Warning', { timeOut: 3000 })
+            return false;
+        }
+        //if (discount == '') {
+        //    toastr.warning('Discount cannot be null', 'Warning', { timeOut: 3000 })
+        //    return false;
+        //}
+        return true;
+    }
+
+
+    function isPresent(objects, object) {
+        for (i = 0; i < objects.length; i++) {
+            if (objects[i].ProductId == object.ProductId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
+    //$('body').on('click', '#reset', function () {
+    //    $('#select2').val('Noodle');
+    //    $('#select2').select2().trigger('change');
+    //})
+
+
+
+    //var searchFiltered;
+    //function Search(productName, categoryName, supplierName) {
+
+
+    //    if (productName != '') {
+    //        searchFiltered = datas.filter(function (el) {
+    //            return el.ProductName == productName;
+    //        })
+    //    }
+    //    else {
+    //        searchFiltered = datas;
+    //    }
+
+
+    //    if (categoryName != '') {
+    //        searchFiltered = searchFiltered.filter(function (el) {
+    //            return el.CategoryId == categoryName;
+    //        })
+    //    }
+    //    else {
+    //        searchFiltered = searchFiltered;
+    //    }
+
+
+    //    if (supplierName != '') {
+    //        searchFiltered = searchFiltered.filter(function (el) {
+    //            return el.SupplierId == supplierName;
+    //        })
+    //    } else {
+    //        searchFiltered = searchFiltered;
+    //    }
+
+    //    return searchFiltered;
+    //}
+
+
+</script>

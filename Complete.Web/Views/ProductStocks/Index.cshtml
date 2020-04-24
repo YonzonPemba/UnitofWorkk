@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Complete.Domain.ProductStock>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Category.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.Supplier.SupplierName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinimumStockQuantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Product.ProductName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Product.Category.CategoryName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Product.Supplier.SupplierName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MinimumStockQuantity)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ProductStockId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ProductStockId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ProductStockId })
+    </td>
+</tr>
+}
+
+</table>
